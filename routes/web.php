@@ -24,5 +24,7 @@ Route::get('/admin', 'AdminController@goToAdminPage');
 Route::get('/profile', 'UserController@profilePage');
 Route::get('/verify/{id}', 'AdminController@verify');
 Route::get('/delete/{id}', 'AdminController@delete');
-Route::post('/sendMessage', 'AdminController@sendMessage');
+Route::group(['middleware' => 'auth'], function() {
+Route::any('sendMessage', 'AdminController@message');
+});
  

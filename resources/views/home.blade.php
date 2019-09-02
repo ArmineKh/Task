@@ -21,11 +21,12 @@
                     </div>
                     @endif
 
-               
-                    
+                
+                     @if(Auth::user()->id != 1 && Auth::user()->verify != 1)
 
+                      <form method="post" action="{{URL::to('/sendMessage') }}">
+                        {{csrf_field()}}
 
-                    <form  method="POST" action="./sendMessage">
                         <div class="form-group">
                             {{$errors->first('name')}} 
                             <label for="exampleInputEmail1">User name</label>
@@ -47,14 +48,14 @@
                             <label for="exampleFormControlTextarea1">Message</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        {{csrf_field()}}
+                        <button type="submit" name="button" class="btn btn-primary">Send</button>
                     </form>
 
-                    <div class="container">
-                    </div>
-                       
+                    @endif
 
+                    <div class="container">
+                        Welcom you are verify!
+                    </div>
 
 
                 </div>

@@ -9,18 +9,23 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     <div class="container">
                         <div class="row">
                             @foreach($users as $u)
+                            @foreach($message as $m)
+
                             <div class="col-md-4">
                                 <h3>User name: <b>{{$u->name}}</b></h3>
                                 <h4>User email: <b>{{$u->email}}</b></h4>
-                                
+                                @if($m->user_id == $u->id)
+                                <h4>Message subject: <b>{{$m->subject}}</b></h4>
+                                <textarea>{{$m->message}}</textarea>
+                                @endif
                                 <button class="btn btn-primary">
                                     <a  style="text-decoration:none; color: black" href="{{URL::to('/')}}/verify/{{$u->id}}">Verify</a> 
                                 </button>
@@ -28,6 +33,7 @@
                                     <a  style="text-decoration:none; color: black" href="{{URL::to('/')}}/delete/{{$u->id}}">Delete</a> 
                                 </button>
                             </div>
+                            @endforeach
                             @endforeach
                         </div>
                     </div>
